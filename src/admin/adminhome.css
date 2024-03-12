@@ -1,0 +1,45 @@
+#side-bar-admin {
+  background-color: #33333387;
+  color: #fff;
+  padding: 20px;
+  width: 250px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+#side-bar-admin nav {
+  display: flex;
+  flex-direction: column;
+}
+
+#side-bar-admin h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#side-bar-admin h2 {
+  color: rgb(15, 222, 153);
+  font-size: 18px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  margin: 2rem;
+  font-size: larger;
+  padding: 5px;
+}
+
+#side-bar-admin h2:hover {
+  color: #ff9900;
+}
+
+#side-bar-admin #admin-logout {
+  margin-top: 30px;
+  color: white;
+}
+
+#side-bar-admin #admin-logout:hover {
+  color: #ff3333;
+}
+
+#side-bar-admin div {
+  flex: 1;
+}

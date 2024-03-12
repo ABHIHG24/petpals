@@ -1,0 +1,28 @@
+.user-admin {
+  font-size: 20px;
+}
+.single-user-admin img {
+  width: 10rem;
+  height: 10rem;
+}
+h1 {
+  text-align: center;
+}
+#container-admin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  text-align: center;
+  background-color: beige;
+}
+#admin-user-container {
+  width: 100%;
+  background-color: beige;
+}
+
+.single-user-admin {
+  border: 2px solid black;
+  padding: 2.7rem;
+  background-color: antiquewhite;
+}
