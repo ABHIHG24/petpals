@@ -73,23 +73,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {/* <div className="container3">
-        <h2>"Welcome to our interactive Pet Adoption Quiz! 🐾</h2>
-        <p>
-          Are you thinking about adopting a furry friend but not sure which type
-          of pet would best suit your lifestyle and preferences? Our quiz is
-          here to help! Answer a series of fun and insightful questions, and
-          we'll match you with the perfect pet companion tailored to your unique
-          needs. Discover if you're more suited for a playful pup, a cuddly cat,
-          or perhaps even a charming rabbit! Our quiz considers factors like
-          your living situation, activity level, allergies, and more to ensure
-          we find the ideal match for you. Embark on this journey with us and
-          uncover the pet companion of your dreams. Who knows? You might just
-          find your new best friend waiting for you at the end of the quiz!
-          Let's get started! 🐶🐱🐰"
-        </p>
-        <a href="/Quiz">Quiz</a>
-      </div> */}
       <div className="container4">
         <h2>Our Mission :</h2>
         <p>
@@ -105,7 +88,7 @@ const Home = () => {
           <p>
             Your donation can make a difference in the lives of pets in need.
           </p>
-          <Link to="/Donate" className="donate-button-home">
+          <Link to="/Donate" className="text-blue-500">
             Donate Now
           </Link>
         </div>

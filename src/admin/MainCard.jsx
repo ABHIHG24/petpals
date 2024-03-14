@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { forwardRef } from "react";
 
-// material-ui
 import { useTheme } from "@mui/material/styles";
 import {
   Card,
@@ -15,8 +14,6 @@ import {
 const headerSX = {
   "& .MuiCardHeader-action": { mr: 0 },
 };
-
-// ==============================|| CUSTOM MAIN CARD ||============================== //
 
 const MainCard = forwardRef(
   (
@@ -54,7 +51,6 @@ const MainCard = forwardRef(
           ...sx,
         }}
       >
-        {/* card header and action */}
         {title && (
           <CardHeader
             sx={headerSX}
@@ -65,10 +61,8 @@ const MainCard = forwardRef(
           />
         )}
 
-        {/* content & header divider */}
         {title && <Divider />}
 
-        {/* card content */}
         {content && (
           <CardContent sx={contentSX} className={contentClass}>
             {children}

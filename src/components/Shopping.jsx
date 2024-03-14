@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Shoppingdata from "./json/shoppingdata.json";
 import "./Shopping.css";
 import i1 from "./shopimg/PremiumDogFood.jpeg";
@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Shopping = (props) => {
-  // console.log(props);
   const navigate = useNavigate();
   const [productdata, setProductData] = useState([]);
   const image = [i1, i2, i3, i4, i5, i6];

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./Donote.css";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-import { nanoid } from "nanoid";
 
 const Donate = () => {
   const [data, setData] = useState({ name: "", amount: "" });

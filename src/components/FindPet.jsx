@@ -1,21 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-// import petData from "./data.json";
-// import c1 from "./img/Persian.jpeg";
-// import c2 from "./img/Siamese.jpeg";
-// import c3 from "./img/MaineCoon.jpg";
-// import c4 from "./img/Bengal-Cat.jpg";
-// import c5 from "./img/Scottish Fold.jpeg";
-// import d1 from "./img/labrador-retriever-05.jpg";
-// import d2 from "./img/german-shepherds.jpg";
-// import d3 from "./img/GoldenRetriever.jpg";
-// import d4 from "./img/Bulldog_inglese.jpg";
-// import d5 from "./img/Beagle-hound-dog-puppy.webp";
-// import d7 from "./img/Boxer.jpeg";
-// import d8 from "./img/SiberianHusky.jpeg";
-// import d10 from "./img/shih-tzu-dog.jpeg";
-import AdoptionForm from "./AdoptionForm";
 import "./Findpet.css";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -23,9 +8,6 @@ import { toast } from "react-toastify";
 const FindPet = (props) => {
   console.log(props);
   const navigate = useNavigate();
-  // const { cats, dogs } = petData;
-  // const catImages = [c1, c2, c3, c4, c5];
-  // const dogImages = [d1, d2, d3, d4, d5, d7, d8, d10];
 
   const [cat, setCat] = React.useState([]);
   const [dog, setDog] = React.useState([]);

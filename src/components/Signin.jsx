@@ -5,7 +5,6 @@ import TextField from "@mui/material/TextField";
 import "./Signin.css";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
-import App from "../App";
 import { toast } from "react-toastify";
 
 function Signup(props) {
@@ -43,7 +42,7 @@ function Signup(props) {
           console.log(res.data.success);
         }
       } else {
-        toast.success("wrong username or password");
+        toast.error("wrong username or password");
       }
     } catch (error) {
       console.log(error);
@@ -57,12 +56,8 @@ function Signup(props) {
 
     if (!admin) {
       document.querySelector("#Admin").textContent = "user";
-      // props.setRole("admin");
-      // console.log("admin");
       return isadmin(true);
     }
-    // props.setRole("user");
-    // console.log("isuser");
     document.querySelector("#goSignup").style.display = "block";
     document.querySelector(".btn-resetpassword").style.display = "block";
     document.querySelector("#Admin").textContent = "admin";
@@ -70,7 +65,6 @@ function Signup(props) {
   };
 
   if (isLoggedIn) {
-    // toast.success("successfully login");
     return <Navigate to="/" />;
   }
 
