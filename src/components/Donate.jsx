@@ -12,7 +12,9 @@ const Donate = () => {
 
   const handlePayment = async () => {
     try {
-      const stripe = await loadStripe(process.env.REACT_APP_STRIPE_KEY);
+      const stripe = await loadStripe(
+        "pk_test_51OnZUpSB5YEoLiYMpT1485D9HyF8Aj4k8Qbq09X2q2YJkjik2HRqwuyLo3mT6a5yU83Sfa3jppWWT5pZqJXFsAVo00ie9U0Okq"
+      );
 
       const response = await CustomFetch.post("/api/payment/insert", data);
 
