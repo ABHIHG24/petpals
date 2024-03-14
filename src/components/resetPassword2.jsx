@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "./resetPassword2.css";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { CustomFetch } from "../axios/CustionFetch";
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -29,8 +29,7 @@ const ResetPassword = () => {
       toast.success("password should contain at least 8 characters");
       return;
     }
-    axios
-      .put(`http://localhost:5000/api/petpals/resetPassword/${token}`, data)
+    CustomFetch.put(`/api/petpals/resetPassword/${token}`, data)
       .then((response) => {
         console.log(response.data);
         toast.success("Password reset successful");

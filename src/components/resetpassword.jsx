@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import "./resetpassword.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { CustomFetch } from "../axios/CustionFetch";
 
 const Resetpassword = () => {
   const [submit, isSubmit] = useState(false);
   const [email, setEmail] = useState(null);
   const handleSubmit = () => {
-    axios
-      .post("http://localhost:5000/api/petpals/forgetPassword", {
-        email: email,
-      })
+    CustomFetch.post("/api/petpals/forgetPassword", {
+      email: email,
+    })
       .then((res) => {
         console.log(res.data);
         isSubmit(true);

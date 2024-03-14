@@ -7,9 +7,9 @@ import i3 from "./shopimg/InteractiveDogToy.jpeg";
 import i4 from "./shopimg/SoftDogBed.jpeg";
 import i5 from "./shopimg/HealthyCatFood.jpeg";
 import i6 from "./shopimg/CatScratchingPost.jpeg";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { CustomFetch } from "../axios/CustionFetch";
 
 const Shopping = (props) => {
   const navigate = useNavigate();
@@ -17,8 +17,7 @@ const Shopping = (props) => {
   const image = [i1, i2, i3, i4, i5, i6];
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/item/get")
+    CustomFetch.get("/api/item/get")
       .then((res) => {
         console.log(res.data);
         const data = res.data;
@@ -55,12 +54,11 @@ const Shopping = (props) => {
       return;
     }
 
-    axios
-      .post("http://localhost:5000/api/item/insert", {
-        ...data,
-        img: image,
-        uid: props.uid,
-      })
+    CustomFetch.post("/api/item/insert", {
+      ...data,
+      img: image,
+      uid: props.uid,
+    })
       .then((res) => {
         console.log(res);
         toast.success("successfully added to dashboard");

@@ -1,13 +1,12 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import "./donation.css";
+import { CustomFetch } from "../axios/CustionFetch";
 const Donation = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/payment/get")
+    CustomFetch.get("/api/payment/get")
       .then((res) => {
         console.log(res);
         setData(res.data);

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "./Dashboard.css";
+import { CustomFetch } from "../axios/CustionFetch";
 
 const Dashboard = ({ uid }) => {
   const [items, setItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/item/get")
+    CustomFetch.get("/api/item/get")
       .then((res) => {
         console.log(res.data);
         const filteredItems = res.data.filter((item) => item.uid === uid);
@@ -28,8 +27,7 @@ const Dashboard = ({ uid }) => {
   }, [items]);
 
   const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:5000/api/item/deleteOne`, { data: { _id: id } })
+    CustomFetch.delete(`/api/item/deleteOne`, { data: { _id: id } })
       .then((res) => {
         const updatedItems = items.filter((item) => item._id !== id);
         setItems(updatedItems);

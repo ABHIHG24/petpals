@@ -9,6 +9,7 @@ import {
   CardContent,
   CardActions,
 } from "@mui/material";
+import { CustomFetch } from "../axios/CustionFetch";
 
 import CardMedia from "@mui/material/CardMedia";
 
@@ -23,14 +24,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import MainCard from "./MainCard";
 import Icon from "@mdi/react";
-import { mdiSquareEditOutline } from "@mdi/js";
 import { mdiDelete } from "@mdi/js";
 import { mdiClose } from "@mdi/js";
 import { mdiEyeOutline } from "@mdi/js";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import axios from "axios";
-import { SingleBed } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -94,8 +91,7 @@ export default function Result() {
   const [data, setData] = useState([]);
 
   const handleSingleDelete = (id) => {
-    axios
-      .delete(`http://localhost:5000/api/form/deleteSingle/${id}`)
+    CustomFetch.delete(`/api/form/deleteSingle/${id}`)
       .then((res) => {
         console.log(res);
         toast.success("successfully deleted");
@@ -106,8 +102,7 @@ export default function Result() {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/form/get")
+    CustomFetch.get("/api/form/get")
       .then((res) => {
         console.log(res);
         setData(res.data);
@@ -118,8 +113,7 @@ export default function Result() {
   }, [handleSingleDelete]);
 
   const handleSingleData = async (id) => {
-    axios
-      .get(`http://localhost:5000/api/form/getSingle/${id}`)
+    CustomFetch.get(`/api/form/getSingle/${id}`)
       .then((res) => {
         console.log(res);
         setSingleData(res.data);

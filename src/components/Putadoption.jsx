@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./Putadoption.css";
 import petData from "./data.json";
 import { toast } from "react-toastify";
+import { CustomFetch } from "../axios/CustionFetch";
 
 const PutAdoption = () => {
   const [formData, setFormData] = useState({
@@ -54,8 +54,7 @@ const PutAdoption = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/api/form/insert", formData)
+    CustomFetch.post("/api/form/insert", formData)
       .then((res) => {
         console.log(res.data);
         setFormData({

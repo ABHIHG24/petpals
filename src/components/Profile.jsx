@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Profile.css";
+import { CustomFetch } from "../axios/CustionFetch";
 
 const Profile = (uid) => {
   console.log(uid.uuid);
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios
-      .post("http://localhost:5000/api/petpals/getSingle", { _id: uid.uuid })
+    CustomFetch.post("/api/petpals/getSingle", { _id: uid.uuid })
       .then((res) => {
         console.log(res.data);
         const userData = res.data;

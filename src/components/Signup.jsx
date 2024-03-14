@@ -8,8 +8,8 @@ import Select from "@mui/material/Select";
 import "./Signup.css";
 import img from "../img/download.jpeg";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { Navigate } from "react-router-dom";
+import { CustomFetch } from "../axios/CustionFetch";
 
 function Signup() {
   const [country, setCountry] = useState("");
@@ -67,8 +67,7 @@ function Signup() {
 
     const { repassword, ...postData } = data;
 
-    axios
-      .post(`http://localhost:5000/api/petpals/insert`, postData)
+    CustomFetch.post(`/api/petpals/insert`, postData)
       .then((res) => {
         console.log(res.data);
         setIsSignedUp(true);

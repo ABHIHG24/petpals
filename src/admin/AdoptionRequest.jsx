@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "./AdoptionRequest.css";
 import { toast } from "react-toastify";
+import { CustomFetch } from "../axios/CustionFetch";
 
 const AdoptionRequest = () => {
   const [data, setData] = useState([]);
@@ -9,8 +9,7 @@ const AdoptionRequest = () => {
   const [selectedPet, setSingleData] = useState(false);
   const [view, setView] = useState("user");
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/request/get")
+    CustomFetch.get("/api/request/get")
       .then((res) => {
         console.log(res.data);
         setData(res.data);
@@ -20,8 +19,7 @@ const AdoptionRequest = () => {
       });
   }, []);
   const handledeletereq = (id) => {
-    axios
-      .delete(`http://localhost:5000/api/request/deleteSingle/${id}`)
+    CustomFetch.delete(`/api/request/deleteSingle/${id}`)
       .then((res) => {
         console.log(res);
         toast.success("successfully deleted");
@@ -31,8 +29,7 @@ const AdoptionRequest = () => {
       });
   };
   const handleView = (id) => {
-    axios
-      .get(`http://localhost:5000/api/form/getSingle/${id}`)
+    CustomFetch.get(`/api/form/getSingle/${id}`)
       .then((res) => {
         console.log(res.data);
         setSingleData(res.data);
@@ -50,8 +47,7 @@ const AdoptionRequest = () => {
   const handleuser = (uid) => {
     let data = { _id: uid };
 
-    axios
-      .post("http://localhost:5000/api/petpals/getSingle", data)
+    CustomFetch.post("/api/petpals/getSingle", data)
       .then((res) => {
         console.log("Setting view to user");
         setView("user");
@@ -67,8 +63,7 @@ const AdoptionRequest = () => {
   };
 
   const handleAccept = (id) => {
-    axios
-      .post(`http://localhost:5000/api/request/success/${id}`)
+    CustomFetch.post(`/api/request/success/${id}`)
       .then((res) => {
         console.log(res);
         toast.success("successfully Accepted");
@@ -78,8 +73,7 @@ const AdoptionRequest = () => {
       });
   };
   const handleReject = (id) => {
-    axios
-      .post(`http://localhost:5000/api/request/reject/${id}`)
+    CustomFetch.post(`/api/request/reject/${id}`)
       .then((res) => {
         console.log(res);
         toast.success("successfully Rejected");

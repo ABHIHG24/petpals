@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import "./Signin.css";
-import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { CustomFetch } from "../axios/CustionFetch";
 
 function Signup(props) {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -20,10 +20,7 @@ function Signup(props) {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/petpals/login",
-        data
-      );
+      const res = await CustomFetch.post("/api/petpals/login", data);
       console.log(res);
       const checkrole = document.querySelector("#Admin").textContent;
       if (checkrole !== res.data.role) {

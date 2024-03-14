@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-// import Manageuser from "./managepet";
 import ManageUsers from "./Manageusers";
 import AdminNav from "./AdminNav";
 import Putadoption from "../components/Putadoption";

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./Findpet.css";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { CustomFetch } from "../axios/CustionFetch";
 
 const FindPet = (props) => {
   console.log(props);
@@ -14,8 +14,7 @@ const FindPet = (props) => {
   const [selectedPet, setSelectedPet] = useState(null);
 
   React.useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/form/get")
+    CustomFetch.get("/api/form/get")
       .then((res) => {
         console.log(res.data);
         const cats = [];

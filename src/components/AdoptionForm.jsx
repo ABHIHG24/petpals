@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./AdoptionForm.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { CustomFetch } from "../axios/CustionFetch";
 import { toast } from "react-toastify";
 
 const AdoptionForm = (props) => {
@@ -35,10 +35,7 @@ const AdoptionForm = (props) => {
       uid: props.uid,
     };
 
-    console.log("formdata", updatedFormData);
-
-    axios
-      .post("http://localhost:5000/api/request/insert", updatedFormData)
+    CustomFetch.post("/api/request/insert", updatedFormData)
       .then((res) => {
         console.log(res);
       })

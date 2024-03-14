@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import articlesdata from "./artical.json";
 import "./Article.css";
-import axios from "axios";
+import { CustomFetch } from "../axios/CustionFetch";
 import { toast } from "react-toastify";
-axios.defaults.withCredentials = true;
 
 const Article = (props) => {
   const articles = articlesdata.articles;
@@ -20,8 +19,7 @@ const Article = (props) => {
 
   useEffect(
     () => {
-      axios
-        .get("http://localhost:5000/api/artical/get")
+      CustomFetch.get("/api/artical/get")
         .then((res) => {
           console.log(res.data);
           setArticles(res.data);
@@ -47,13 +45,12 @@ const Article = (props) => {
 
     console.log(props.uid);
     addarticale({ ...artical, uid: props.uid });
-    axios
-      .post(`http://localhost:5000/api/artical/insert`, artical, {
-        headers: {
-          Authorization: `bearer ${jwtToken}`,
-        },
-        withCredentials: true,
-      })
+    CustomFetch.post(`/api/artical/insert`, artical, {
+      headers: {
+        Authorization: `bearer ${jwtToken}`,
+      },
+      withCredentials: true,
+    })
       .then((res) => {
         console.log(res.data);
         document
@@ -74,8 +71,7 @@ const Article = (props) => {
     console.log(id);
     let data = { _id: id };
     console.log(data);
-    axios
-      .delete(`http://localhost:5000/api/artical/deleteOne`, { data })
+    CustomFetch.delete(`/api/artical/deleteOne`, { data })
       .then((res) => {
         console.log(res.data);
       })
