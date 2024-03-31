@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CustomFetch } from "../axios/CustionFetch";
+import { toast } from "react-toastify";
 
 const ManageArticle = () => {
   const [articles, setArticles] = useState([]);
@@ -24,7 +25,7 @@ const ManageArticle = () => {
     CustomFetch.delete(`/api/artical/deleteOne`, { data })
       .then((res) => {
         console.log(res.data);
-        console.log("deleted Successfully");
+        toast.success("deleted Successfully");
         fetchData();
       })
       .catch((err) => {
@@ -38,17 +39,17 @@ const ManageArticle = () => {
 
   return (
     <div className="donations-container">
-      <div className="donation-header">
+      <div className="donation-header ">
         <h1>Donations</h1>
         <button
-          className="btn bg-cyan-400 hover:bg-cyan-300 :"
+          className="btn bg-cyan-400 hover:bg-cyan-300 "
           onClick={refreshPage}
         >
           Refresh
         </button>{" "}
       </div>
       {articles.map((article, index) => (
-        <div key={index} className="article bg-slate-300">
+        <div key={index} className="article bg-slate-200 ">
           <div className="article-content">
             <h2 className="text-2xl">Title : {article.title}</h2>
             <p className="font-bold">Author: {article.author}</p>

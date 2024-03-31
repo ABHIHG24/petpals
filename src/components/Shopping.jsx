@@ -25,7 +25,7 @@ const Shopping = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button className="btn btn-primary">Buy Now</button>
+                <button className="btn btn-primary">Shop Now</button>
               </a>
             </div>
           </div>
@@ -43,7 +43,7 @@ const Shopping = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button className="btn btn-primary">Buy Now</button>
+                <button className="btn btn-primary">Shop Now</button>
               </a>
             </div>
           </div>
@@ -64,7 +64,7 @@ const Shopping = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button className="btn btn-primary">Buy Now</button>
+                <button className="btn btn-primary">Shop Now</button>
               </a>
             </div>
           </div>

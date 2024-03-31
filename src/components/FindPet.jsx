@@ -100,11 +100,11 @@ const FindPet = (props) => {
               {filter === "cats" ? (
                 <>
                   <h2 className="font-bold text-2xl">Cats</h2>
-                  <ul className="flex gap-56 flex-wrap justify-center align-middle ml-10 mr-20 mt-14">
+                  <ul className="flex gap-28 flex-wrap justify-center align-middle">
                     {cat.map((data, index) => (
                       <li
                         key={index}
-                        className="items border-2 border-black p-3 mt-4 bg-sky-100"
+                        className="items border-2 border-black p-3 mt-4 bg-sky-100 w-72 ml-6"
                       >
                         <img
                           src={data.image}

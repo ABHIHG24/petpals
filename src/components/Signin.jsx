@@ -17,47 +17,64 @@ function Signin(props) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    // Check if 'data' is empty or undefined
     if (Object.keys(data).length === 0) {
       return toast.error(`Please enter all the credentials`);
     }
 
+    // Check if any field in 'data' is empty
     for (const key in data) {
       if (!data[key]) {
         toast.error(`Please enter all the credentials`);
         return;
       }
     }
+
     try {
       const res = await CustomFetch.post("/api/petpals/login", data);
-      // console.log(res);
       const checkrole = document.querySelector("#Admin").textContent;
-      if (checkrole !== res.data.role) {
-        if (res.data.success) {
-          props.setUid(res.data.uid);
 
-          nav("/");
+      // Check if the response contains the expected data structure
+      if (res && res.data) {
+        if (checkrole !== res.data.role) {
+          if (res.data.success) {
+            props.setUid(res.data.uid);
+            nav("/");
 
-          localStorage.setItem("Role", res.data.role);
-          localStorage.setItem("Login", true);
-          localStorage.setItem("userId", res.data.uid);
+            localStorage.setItem("Role", res.data.role);
+            localStorage.setItem("Login", true);
+            localStorage.setItem("userId", res.data.uid);
 
-          props.setRole(localStorage.getItem("Role"));
-          props.isLogin(localStorage.getItem("Login"));
+            props.setRole(localStorage.getItem("Role"));
+            props.isLogin(localStorage.getItem("Login"));
 
-          toast.success("successfully login");
+            toast.success("Successfully logged in");
 
-          setTimeout(() => {}, 2000);
-          setData({});
+            // Reset 'data' to empty object after successful login
+            setData({});
+          } else {
+            // Handle unsuccessful login
+          }
         } else {
-          // console.log(res.data.message);
-          // console.log(res.data.success);
+          toast.error("Wrong username or password");
         }
       } else {
-        toast.error("wrong username or password");
+        // Handle unexpected response structure
       }
     } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.message);
+      console.error(error);
+
+      // Check if error.response exists before accessing its properties
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("An error occurred during login");
+      }
     }
   };
 
