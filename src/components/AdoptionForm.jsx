@@ -5,7 +5,6 @@ import { CustomFetch } from "../axios/CustionFetch";
 import { toast } from "react-toastify";
 
 const AdoptionForm = (props) => {
-  console.log(props);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",

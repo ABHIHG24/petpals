@@ -16,12 +16,12 @@ import MenuItem from "@mui/material/MenuItem";
 const pages = [
   "Home",
   "Find_a_pet",
-  "Shopping",
   "Article",
+  "Shopping",
   "Donate",
   "About_us",
 ];
-const settings = ["Profile", "Dashboard", "Logout"];
+const settings = ["Profile", "Logout"];
 function Navbar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -40,6 +40,7 @@ function Navbar(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -129,7 +130,8 @@ function Navbar(props) {
               </Link>
             ))}
           </Box>
-          {props.login ? (
+
+          {localStorage.getItem("Login") ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -159,9 +161,10 @@ function Navbar(props) {
                         to="/Signin"
                         onClick={() => {
                           {
-                            props.isLogin(false);
-                            // localStorage.removeItem("role");
-                            localStorage.setItem("login", false);
+                            localStorage.removeItem("Role");
+                            localStorage.removeItem("Login");
+                            localStorage.removeItem("userId");
+                            // console.log("logout");
                           }
                         }}
                       >

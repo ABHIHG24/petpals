@@ -23,21 +23,18 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import MainCard from "./MainCard";
 import Icon from "@mdi/react";
-import { mdiSquareEditOutline } from "@mdi/js";
 import { mdiDelete } from "@mdi/js";
 import { mdiClose } from "@mdi/js";
 import { mdiEyeOutline } from "@mdi/js";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { SingleBed } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 900,
+  width: 990,
   bgcolor: "background.paper",
 
   borderRadius: "10px",
@@ -82,7 +79,7 @@ export default function ManageUsers() {
   const [open, setOpen] = React.useState(false);
   const handleClose2 = () => setOpen2(false);
   const HandleOpen = (id) => {
-    setOpen2(true);
+    // setOpen2(true);
     handleSingleDelete(id);
   };
   const HandleOpen1 = (id) => {
@@ -183,7 +180,6 @@ export default function ManageUsers() {
                         <StyledTableCell component="th" scope="row">
                           {value.Username}
                         </StyledTableCell>
-                        {/* <StyledTableCell>{value.category_name}</StyledTableCell> */}
 
                         <StyledTableCell>{value.dob}</StyledTableCell>
                         <StyledTableCell>{value.email}</StyledTableCell>
@@ -204,15 +200,7 @@ export default function ManageUsers() {
                                 HandleOpen(value._id);
                               }}
                             />
-                            {/* <Link to={`/UpdateProduct/${value._id}`}>
-                              {" "}
-                              <Icon
-                                path={mdiSquareEditOutline}
-                                size={1.2}
-                                color="purple"
-                                style={{ cursor: "pointer" }}
-                              />
-                            </Link> */}
+
                             <Icon
                               path={mdiEyeOutline}
                               size={1.2}

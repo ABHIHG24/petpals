@@ -17,20 +17,16 @@ const Article = (props) => {
     document.querySelector("#addArtical").style.display = "flex";
   };
 
-  useEffect(
-    () => {
-      CustomFetch.get("/api/artical/get")
-        .then((res) => {
-          console.log(res.data);
-          setArticles(res.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching articles:", error);
-        });
-    },
-    [],
-    [artical]
-  );
+  useEffect(() => {
+    CustomFetch.get("/api/artical/get")
+      .then((res) => {
+        // console.log(res.data);
+        setArticles(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching articles:", error);
+      });
+  }, [artical1]);
 
   const handleAddData = (e) => {
     addarticale({ ...artical, [e.target.name]: e.target.value });
@@ -60,21 +56,9 @@ const Article = (props) => {
           .querySelectorAll("textarea")
           .forEach((textarea) => (textarea.value = ""));
         toast.success("successful");
+        setArticles([...artical1, res.data]);
       })
 
-      .catch((err) => {
-        console.error("Error:", err);
-      });
-  }
-
-  function deleteData(id) {
-    console.log(id);
-    let data = { _id: id };
-    console.log(data);
-    CustomFetch.delete(`/api/artical/deleteOne`, { data })
-      .then((res) => {
-        console.log(res.data);
-      })
       .catch((err) => {
         console.error("Error:", err);
       });
@@ -134,18 +118,6 @@ const Article = (props) => {
                 <p className="font-bold">Author: {article.author}</p>
                 <p>{article.content}</p>
                 {console.log(props.uid, article)}
-              </div>
-              <div className="article-buttons">
-                {props.uid === article.uid ? (
-                  <button
-                    onClick={() => {
-                      // console.log("hiiii");
-                      deleteData(article._id);
-                    }}
-                  >
-                    Delete
-                  </button>
-                ) : null}
               </div>
             </li>
           ))}

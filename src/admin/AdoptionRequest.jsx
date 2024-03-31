@@ -5,6 +5,7 @@ import { CustomFetch } from "../axios/CustionFetch";
 
 const AdoptionRequest = () => {
   const [data, setData] = useState([]);
+
   const [viewRequest, isViewResquest] = useState(true);
   const [selectedPet, setSingleData] = useState(false);
   const [view, setView] = useState("user");
@@ -31,7 +32,7 @@ const AdoptionRequest = () => {
   const handleView = (id) => {
     CustomFetch.get(`/api/form/getSingle/${id}`)
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         setSingleData(res.data);
         setView("pet");
         console.log(view);
@@ -50,7 +51,7 @@ const AdoptionRequest = () => {
     CustomFetch.post("/api/petpals/getSingle", data)
       .then((res) => {
         console.log("Setting view to user");
-        setView("user");
+        // setView("user");
 
         console.log(res.data);
         const userData = res.data;
@@ -63,6 +64,7 @@ const AdoptionRequest = () => {
   };
 
   const handleAccept = (id) => {
+    // console.log("id bbbbb", id);
     CustomFetch.post(`/api/request/success/${id}`)
       .then((res) => {
         console.log(res);

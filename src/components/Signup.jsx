@@ -10,10 +10,19 @@ import img from "../img/download.jpeg";
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { CustomFetch } from "../axios/CustionFetch";
+import { toast } from "react-toastify";
 
 function Signup() {
   const [country, setCountry] = useState("");
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    Username: "",
+    dob: "",
+    image: null,
+    email: "",
+    country: "",
+    password: "",
+    repassword: "",
+  });
   const [isSignedUp, setIsSignedUp] = useState(false);
 
   const country_names = [
@@ -48,47 +57,63 @@ function Signup() {
         image: imageDataString,
       });
     };
-    console.log(data);
+    // console.log(data);
     reader.readAsDataURL(file);
   };
 
   const handleClick = async (e) => {
     e.preventDefault();
 
+    // console.log(data);
+
+    if (Object.keys(data).length === 0) {
+      return toast.error(`Please enter all the credentials`);
+    }
+    if (!country_names.includes(data.country)) {
+      return toast.error("Please select a valid country");
+    }
+    // console.log(data);
+
+    if (Object.keys(data).some((key) => !data[key])) {
+      toast.error(`Please enter all the credentials`);
+      return;
+    }
+
     const passw = data.password;
     const repassw = data.repassword;
     if (passw.length < 8) {
-      return alert("password must be atleast 8 charaters");
+      return toast.info("password must be atleast 8 charaters");
     }
 
     if (passw !== repassw) {
-      return alert("Password and re-entered password do not match");
+      return toast.info("Password and re-entered password do not match");
     }
 
     const { repassword, ...postData } = data;
 
     CustomFetch.post(`/api/petpals/insert`, postData)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setIsSignedUp(true);
+        toast.success("signUp successful");
       })
       .catch((err) => {
-        console.error("Error:", err);
+        console.error("Error:", err.response);
+        toast.error(err.response.data.message);
 
         const verify = err.response.data;
 
         if (verify.username === false) {
-          return alert("Username alredy exit");
+          return toast.info("Username already exit");
         }
 
         if (verify.email === false) {
-          return alert("email alredy exit");
+          return toast.info("email already exit");
         }
       });
   };
 
   if (isSignedUp) {
-    console.log("Navigate");
     return <Navigate to="/Signin" />;
   }
 

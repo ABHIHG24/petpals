@@ -1,14 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import "./Signin.css";
-import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { CustomFetch } from "../axios/CustionFetch";
 
-function Signup(props) {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+function Signin(props) {
+  const nav = useNavigate();
   const [data, setData] = React.useState({});
   const [admin, isadmin] = React.useState(false);
 
@@ -18,25 +17,40 @@ function Signup(props) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (Object.keys(data).length === 0) {
+      return toast.error(`Please enter all the credentials`);
+    }
 
+    for (const key in data) {
+      if (!data[key]) {
+        toast.error(`Please enter all the credentials`);
+        return;
+      }
+    }
     try {
       const res = await CustomFetch.post("/api/petpals/login", data);
-      console.log(res);
+      // console.log(res);
       const checkrole = document.querySelector("#Admin").textContent;
       if (checkrole !== res.data.role) {
         if (res.data.success) {
           props.setUid(res.data.uid);
-          localStorage.setItem("login", true);
-          localStorage.setItem("role", JSON.stringify(res.data.role));
 
-          props.setRole(res.data.role);
-          props.isLogin(true);
+          nav("/");
+
+          localStorage.setItem("Role", res.data.role);
+          localStorage.setItem("Login", true);
+          localStorage.setItem("userId", res.data.uid);
+
+          props.setRole(localStorage.getItem("Role"));
+          props.isLogin(localStorage.getItem("Login"));
+
           toast.success("successfully login");
-          setIsLoggedIn(true);
+
+          setTimeout(() => {}, 2000);
           setData({});
         } else {
-          console.log(res.data.message);
-          console.log(res.data.success);
+          // console.log(res.data.message);
+          // console.log(res.data.success);
         }
       } else {
         toast.error("wrong username or password");
@@ -60,11 +74,6 @@ function Signup(props) {
     document.querySelector("#Admin").textContent = "admin";
     isadmin(false);
   };
-
-  if (isLoggedIn) {
-    return <Navigate to="/" />;
-  }
-
   return (
     <div id="main-container-signin">
       <div>
@@ -136,4 +145,4 @@ function Signup(props) {
   );
 }
 
-export default Signup;
+export default Signin;

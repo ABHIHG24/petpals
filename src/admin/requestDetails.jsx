@@ -9,7 +9,6 @@ import {
   CardContent,
   CardActions,
 } from "@mui/material";
-import { CustomFetch } from "../axios/CustionFetch";
 
 import CardMedia from "@mui/material/CardMedia";
 
@@ -24,11 +23,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import MainCard from "./MainCard";
 import Icon from "@mdi/react";
-import { mdiDelete, mdiSquareEditOutline } from "@mdi/js";
+import { mdiDelete } from "@mdi/js";
 import { mdiClose } from "@mdi/js";
-import { mdiEyeOutline } from "@mdi/js";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { CustomFetch } from "../axios/CustionFetch";
 
 const style = {
   position: "absolute",
@@ -72,27 +72,73 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function Result() {
+export default function RequestDetails() {
+  const { reqpet: id, id: reqpet } = useParams();
+
   const theme = useTheme();
-  const [singleData, setSingleData] = useState([]);
 
   const [open2, setOpen2] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const handleClose2 = () => setOpen2(false);
   const HandleOpen = (id) => {
-    // setOpen2(true);
+    setOpen2(true);
     handleSingleDelete(id);
   };
-  const HandleOpen1 = (id) => {
-    handleSingleData(id);
-    setOpen(true);
-  };
+
   const handleClose = () => setOpen(false);
   const handleDelete = () => setOpen2(false);
   const [data, setData] = useState([]);
+  const [singleData, setSingleData] = useState([]);
+  const [singlePet, setSinglePet] = useState(false);
+  const [accept, setAccept] = useState("");
+
+  useEffect(() => {
+    CustomFetch.get(`/api/form/getSingle/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        const data = res.data;
+        setSinglePet([data]);
+        // console.log(res.data, "resdata");
+        // console.log(singlePet, "pet");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
+  const handleAccept = (id) => {
+    CustomFetch.post(`/api/request/success/${id}`)
+      .then((res) => {
+        console.log(res);
+        toast.success("successfully Accepted");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleReject = (id) => {
+    CustomFetch.post(`/api/request/reject/${id}`)
+      .then((res) => {
+        console.log(res);
+        toast.success("successfully Rejected");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleSingleDelete = (id) => {
-    CustomFetch.delete(`/api/form/deleteSingle/${id}`)
+    const jwtToken = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("jwt="))
+      .split("=")[1];
+    axios
+      .delete(`http://localhost:5000/api/petpals/deletesingle/${id}`, {
+        headers: {
+          Authorization: `bearer ${jwtToken}`,
+        },
+        withCredentials: true,
+      })
       .then((res) => {
         console.log(res);
         toast.success("successfully deleted");
@@ -103,31 +149,25 @@ export default function Result() {
   };
 
   useEffect(() => {
-    CustomFetch.get("/api/form/get")
+    axios
+      .get("http://localhost:5000/api/petpals/get")
       .then((res) => {
-        console.log(res);
-        setData(res.data);
+        console.log(res.data);
+        const roleUsers = res.data.filter((item) => item.role === "user");
+        setData(roleUsers);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [handleSingleDelete]);
 
-  const handleSingleData = async (id) => {
-    CustomFetch.get(`/api/form/getSingle/${id}`)
-      .then((res) => {
-        console.log(res);
-        setSingleData(res.data);
-        console.log(singleData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  if (!singlePet) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div style={{ padding: "20px" }}>
-      <MainCard title="View Pets Details">
+      <MainCard title="View Request Details">
         <Box>
           <TableContainer component={Paper} sx={{ mb: 2 }}>
             <Table
@@ -139,9 +179,9 @@ export default function Result() {
                   <StyledTableCell>Sl.NO</StyledTableCell>
                   <StyledTableCell>Image</StyledTableCell>
 
-                  <StyledTableCell>Pet Name</StyledTableCell>
-                  <StyledTableCell>Category Name</StyledTableCell>
-                  <StyledTableCell>kids friendly</StyledTableCell>
+                  <StyledTableCell>pet name</StyledTableCell>
+                  <StyledTableCell>age</StyledTableCell>
+                  <StyledTableCell>type</StyledTableCell>
                   <StyledTableCell
                     style={{ display: "flex", justifyContent: "center" }}
                   >
@@ -151,7 +191,7 @@ export default function Result() {
               </TableHead>
               <TableBody>
                 <>
-                  {data.map((value, index) => {
+                  {singlePet.map((value, index) => {
                     return (
                       <StyledTableRow>
                         <StyledTableCell component="th" scope="row">
@@ -168,10 +208,8 @@ export default function Result() {
                           {value.petName}
                         </StyledTableCell>
 
+                        <StyledTableCell>{value.age}</StyledTableCell>
                         <StyledTableCell>{value.petType}</StyledTableCell>
-                        <StyledTableCell>
-                          {value.friendlyWithKids}
-                        </StyledTableCell>
                         <StyledTableCell>
                           <Box
                             sx={{
@@ -189,23 +227,27 @@ export default function Result() {
                                 HandleOpen(value._id);
                               }}
                             />
+                            {accept === "success" ? (
+                              <button disabled>Accepted</button>
+                            ) : (
+                              <button
+                                className="btn p-1"
+                                onClick={() => {
+                                  handleAccept(reqpet);
+                                }}
+                              >
+                                Accept
+                              </button>
+                            )}
 
-                            <Icon
-                              path={mdiEyeOutline}
-                              size={1.2}
-                              color="green"
-                              style={{ cursor: "pointer" }}
-                              onClick={() => HandleOpen1(value._id)}
-                            />
-                            <Link to={`/UpdatePet/${value._id}`}>
-                              {" "}
-                              <Icon
-                                path={mdiSquareEditOutline}
-                                size={1.2}
-                                color="purple"
-                                style={{ cursor: "pointer" }}
-                              />
-                            </Link>
+                            <button
+                              className="btn p-1"
+                              onClick={() => {
+                                handleReject(reqpet);
+                              }}
+                            >
+                              Reject
+                            </button>
                           </Box>
                         </StyledTableCell>
                       </StyledTableRow>
@@ -251,11 +293,11 @@ export default function Result() {
                           component="th"
                           scope="row"
                         >
-                          petType
+                          Username
                         </StyledTableCell1>
                       </TableHead>
                       <StyledTableCell align="left">
-                        {singleData?.petType}
+                        {singleData?.Username}
                       </StyledTableCell>
                     </StyledTableRow>
                     <StyledTableRow>
@@ -266,11 +308,11 @@ export default function Result() {
                           component="th"
                           scope="row"
                         >
-                          petName
+                          dob
                         </StyledTableCell1>
                       </TableHead>
                       <StyledTableCell align="left">
-                        {singleData?.petName}
+                        {singleData?.dob}
                       </StyledTableCell>
                     </StyledTableRow>
                     <StyledTableRow>
@@ -281,11 +323,11 @@ export default function Result() {
                           component="th"
                           scope="row"
                         >
-                          Any disease
+                          email
                         </StyledTableCell1>
                       </TableHead>
                       <StyledTableCell align="left">
-                        {singleData?.anyIllness}
+                        {singleData?.email}
                       </StyledTableCell>
                     </StyledTableRow>
                     <StyledTableRow>
@@ -296,14 +338,14 @@ export default function Result() {
                           style={{ maxWidth: "200px" }}
                           scope="row"
                         >
-                          Description
+                          country
                         </StyledTableCell1>
                       </TableHead>
                       <StyledTableCell
                         align="left"
                         style={{ maxWidth: "200px" }}
                       >
-                        {singleData?.description}
+                        {singleData?.country}
                       </StyledTableCell>
                     </StyledTableRow>
                   </TableBody>

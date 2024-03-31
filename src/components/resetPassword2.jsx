@@ -31,7 +31,7 @@ const ResetPassword = () => {
     }
     CustomFetch.put(`/api/petpals/resetPassword/${token}`, data)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         toast.success("Password reset successful");
 
         navigate("/signin");

@@ -27,7 +27,7 @@ const PutAdoption = () => {
     });
   };
   useEffect(() => {
-    console.log(formData);
+    // console.log(formData);
   }, [formData]);
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
@@ -56,7 +56,7 @@ const PutAdoption = () => {
     e.preventDefault();
     CustomFetch.post("/api/form/insert", formData)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setFormData({
           petType: "",
           petName: "",
@@ -72,6 +72,7 @@ const PutAdoption = () => {
       })
       .catch((err) => {
         console.error("Error submitting form data:", err);
+        toast.success("unsuccessfully submitted");
       });
   };
 

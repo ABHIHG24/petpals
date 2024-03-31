@@ -13,9 +13,12 @@ const AdminNav = (props) => {
   const [sidebar, issidebar] = useState(true);
 
   const handleLogout = () => {
+    issidebar(false);
+    localStorage.setItem("Role", "user");
+    localStorage.removeItem("Login");
     props.setRole("user");
     props.isLogin(false);
-    localStorage.setItem("login", false);
+    // localStorage.removeItem("userId");
 
     return navigate("/Signin");
   };
@@ -30,7 +33,7 @@ const AdminNav = (props) => {
           </div>
           <div className="navbar-center">
             <h2 className="font-bold">
-              <div className="flex gap-2">
+              <div className="flex gap-2 text-2xl">
                 <RiAdminFill />
                 Admin DashBoard
               </div>
@@ -79,7 +82,7 @@ const AdminNav = (props) => {
             aria-label="Sidebar"
           >
             <CloseIcon
-              className="absolute top-2 left-3 hover:cursor-pointer"
+              className="absolute top-2 left-3 hover:cursor-pointer border-2 border-rose-950 border-solid bg-slate-300 "
               size={30}
               onClick={() => {
                 issidebar(false);
@@ -150,11 +153,20 @@ const AdminNav = (props) => {
                 </li>
                 <li>
                   <Link
-                    to="/AdoptionRequest"
+                    to="/manageArticle"
                     className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                   >
                     <SupportAgentIcon />
-                    <span className="ms-3">Adoption Request</span>
+                    <span className="ms-3">Manage article</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/AdoptionRequests"
+                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                  >
+                    <SupportAgentIcon />
+                    <span className="ms-3">Adoption Requests</span>
                   </Link>
                 </li>
               </ul>
