@@ -99,7 +99,6 @@ function Signup() {
       })
       .catch((err) => {
         console.error("Error:", err.response);
-        toast.error(err.response.data.message);
 
         const verify = err.response.data;
 
@@ -110,6 +109,7 @@ function Signup() {
         if (verify.email === false) {
           return toast.info("email already exit");
         }
+        toast.error(err.response.data.message);
       });
   };
 

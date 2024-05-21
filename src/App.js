@@ -15,7 +15,6 @@ import Aboutus from "./components/Aboutus";
 import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import Profile from "./components/Profile.jsx";
-// import Dashboard from "./components/Dashboard.js";
 import ResetPassowrd2 from "./components/resetPassword2.jsx";
 import AdoptionForm from "./components/AdoptionForm.jsx";
 import { ToastContainer } from "react-toastify";
@@ -92,6 +91,7 @@ function AppContent() {
                 <Route path="/About_us" element={<Aboutus />} />
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/Profile" element={<Profile uuid={uid} />} />
+
                 {/* <Route path="/Dashboard" element={<Dashboard uid={uid} />} /> */}
                 <Route path="/forgetpassword" element={<Resetpassword />} />
 

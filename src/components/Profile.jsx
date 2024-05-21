@@ -23,10 +23,14 @@ const Profile = (uid) => {
         <div>
           {data.map((data) => {
             return (
-              <div className="flex justify-evenly mt-32">
-                <img src={data.image} alt="err" className="pb-8 w-80 h-80" />
+              <div className="flex flex-row justify-evenly mt-32">
+                <img
+                  src={data.image}
+                  alt="err"
+                  className="pb-8 w-80 h-80 rounded-full"
+                />
 
-                <div className="font-bold text-2xl">
+                <div className="font-bold text-2xl flex flex-col gap-3">
                   <p> Username : {data.Username}</p>
                   <p> dob : {data.dob}</p>
                   <p> email : {data.email}</p>

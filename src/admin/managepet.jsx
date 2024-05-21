@@ -78,17 +78,22 @@ export default function Result() {
 
   const [open2, setOpen2] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const [deleteId, setDeleteId] = React.useState("");
+  const [total, setTotal] = React.useState("");
   const handleClose2 = () => setOpen2(false);
   const HandleOpen = (id) => {
-    // setOpen2(true);
-    handleSingleDelete(id);
+    setOpen2(true);
+    setDeleteId(id);
   };
   const HandleOpen1 = (id) => {
     handleSingleData(id);
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
-  const handleDelete = () => setOpen2(false);
+  const handleDelete = () => {
+    setOpen2(false);
+    handleSingleDelete(deleteId);
+  };
   const [data, setData] = useState([]);
 
   const handleSingleDelete = (id) => {
@@ -107,6 +112,7 @@ export default function Result() {
       .then((res) => {
         console.log(res);
         setData(res.data);
+        setTotal(res.data.length);
       })
       .catch((err) => {
         console.log(err);
@@ -128,6 +134,7 @@ export default function Result() {
   return (
     <div style={{ padding: "20px" }}>
       <MainCard title="View Pets Details">
+        <h1 className="font-bold text-2xl">Total Pets : {total}</h1>
         <Box>
           <TableContainer component={Paper} sx={{ mb: 2 }}>
             <Table

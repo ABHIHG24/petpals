@@ -74,6 +74,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function ManageUsers() {
   const theme = useTheme();
   const [singleData, setSingleData] = useState([]);
+  const [total, setTotal] = React.useState("");
 
   const [open2, setOpen2] = React.useState(false);
   const [open, setOpen] = React.useState(false);
@@ -118,6 +119,7 @@ export default function ManageUsers() {
         console.log(res.data);
         const roleUsers = res.data.filter((item) => item.role === "user");
         setData(roleUsers);
+        setTotal(roleUsers.length);
       })
       .catch((err) => {
         console.log(err);
@@ -140,6 +142,8 @@ export default function ManageUsers() {
   return (
     <div style={{ padding: "20px" }}>
       <MainCard title="View Users Details">
+        <h1 className="font-bold text-2xl">Total Users : {total}</h1>
+
         <Box>
           {/* <Paper elevation={3} sx={{ padding: '10px' }}> */}
           <TableContainer component={Paper} sx={{ mb: 2 }}>
