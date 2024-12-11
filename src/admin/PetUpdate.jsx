@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import React, { useState, useEffect } from "react";
 import petData from "../components/data.json";
 import { toast } from "react-toastify";

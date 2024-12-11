@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import React, { useState, useEffect } from "react";
 import {
   Button,
@@ -73,7 +75,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function Result() {
-  const theme = useTheme();
+  // const theme = useTheme();
   const [singleData, setSingleData] = useState([]);
 
   const [open2, setOpen2] = React.useState(false);
