@@ -1,9 +1,9 @@
 import axios from "axios";
 // const url = "http://localhost:5000";
 // const url = "http://localhost:5000";
-const URL = "https://petpalsbackend.onrender.com";
+const url = "https://petpalsbackend.onrender.com";
 const CustomFetch = axios.create({
-  baseURL: URL,
+  baseURL: url,
   headers: {
     Accept: "application/json",
   },
