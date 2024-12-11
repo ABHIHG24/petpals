@@ -268,7 +268,7 @@ export default function RequestDetails() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Box style={{ display: "flex", justifyContent: "end" }}>
+          <Box style={{ display: "flex", justifyContent: "flex-end" }}>
             <Button onClick={handleClose}>
               <Icon path={mdiClose} size={1.5} color="black" />
             </Button>
