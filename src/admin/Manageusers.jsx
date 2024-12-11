@@ -29,7 +29,7 @@ import { mdiDelete } from "@mdi/js";
 import { mdiClose } from "@mdi/js";
 import { mdiEyeOutline } from "@mdi/js";
 import { toast } from "react-toastify";
-import axios from "axios";
+import { CustomFetch } from "../axios/CustionFetch";
 
 const style = {
   position: "absolute",
@@ -98,13 +98,12 @@ export default function ManageUsers() {
       .split("; ")
       .find((row) => row.startsWith("jwt="))
       .split("=")[1];
-    axios
-      .delete(`http://localhost:5000/api/petpals/deletesingle/${id}`, {
-        headers: {
-          Authorization: `bearer ${jwtToken}`,
-        },
-        withCredentials: true,
-      })
+    CustomFetch.delete(`/api/petpals/deletesingle/${id}`, {
+      headers: {
+        Authorization: `bearer ${jwtToken}`,
+      },
+      withCredentials: true,
+    })
       .then((res) => {
         console.log(res);
         toast.success("successfully deleted");
@@ -115,8 +114,7 @@ export default function ManageUsers() {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/petpals/get")
+    CustomFetch.get("/api/petpals/get")
       .then((res) => {
         console.log(res.data);
         const roleUsers = res.data.filter((item) => item.role === "user");
@@ -129,8 +127,7 @@ export default function ManageUsers() {
   }, [handleSingleDelete]);
 
   const handleSingleData = async (_id) => {
-    axios
-      .post(`http://localhost:5000/api/petpals/getSingle`, { _id })
+    CustomFetch.post(`/api/petpals/getSingle`, { _id })
       .then((res) => {
         console.log(res);
         setSingleData(res.data);

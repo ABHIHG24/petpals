@@ -29,7 +29,6 @@ import { mdiDelete } from "@mdi/js";
 import { mdiClose } from "@mdi/js";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { CustomFetch } from "../axios/CustionFetch";
 
 const style = {
@@ -134,13 +133,12 @@ export default function RequestDetails() {
       .split("; ")
       .find((row) => row.startsWith("jwt="))
       .split("=")[1];
-    axios
-      .delete(`http://localhost:5000/api/petpals/deletesingle/${id}`, {
-        headers: {
-          Authorization: `bearer ${jwtToken}`,
-        },
-        withCredentials: true,
-      })
+    CustomFetch.delete(`/api/petpals/deletesingle/${id}`, {
+      headers: {
+        Authorization: `bearer ${jwtToken}`,
+      },
+      withCredentials: true,
+    })
       .then((res) => {
         console.log(res);
         toast.success("successfully deleted");
@@ -151,8 +149,7 @@ export default function RequestDetails() {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/petpals/get")
+    CustomFetch.get("/api/petpals/get")
       .then((res) => {
         console.log(res.data);
         const roleUsers = res.data.filter((item) => item.role === "user");
