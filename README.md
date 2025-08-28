@@ -4,6 +4,14 @@ Petpals is a full-featured web application designed to connect stray and abandon
 
 This repository contains the **Frontend** code for the Petpals platform.
 
+## 🚀 Live Demo
+
+You can view the live, deployed version of the application here:
+
+**[https://petpals-xqqz.onrender.com/](https://petpals-xqqz.onrender.com/)**
+
+*(Please note: The backend on the free Render hosting tier may take a moment to spin up if it has been inactive.)*
+
 ## Repositories
 This project is split into two separate repositories:
 * **🐾 Frontend (Client):** https://github.com/ABHIHG24/petpals
