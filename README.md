@@ -1,75 +1,103 @@
-<<<<<<< HEAD
-# Getting Started with Create React App
+# Petpals - Pet Adoption & Community Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Petpals is a full-featured web application designed to connect stray and abandoned animals with loving homes. It provides a comprehensive platform for users to find and adopt pets, share their experiences through articles, and support the cause through donations.
 
-## Available Scripts
+This repository contains the **Frontend** code for the Petpals platform.
 
-In the project directory, you can run:
+## Repositories
+This project is split into two separate repositories:
+* **🐾 Frontend (Client):** https://github.com/ABHIHG24/petpals
+* **⚙️ Backend (Server):** https://github.com/ABHIHG24/petpalsBackend
 
-### `npm start`
+## ✨ Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 👤 User Features
+* **🐾 Find & Adopt Pets:** Browse a gallery of available pets, view detailed profiles, and submit adoption requests.
+* **📧 Email Confirmation:** Receive an email confirmation via **EmailJS** upon successfully submitting an adoption request.
+* **📝 Article/Story Sharing:** A full CRUD (Create, Read, Update, Delete) module for users to write, publish, and manage their own articles and stories about their pets.
+* **🛍️ Shopping:** A dedicated section that links to external pet supply websites.
+* **💰 Secure Donations:** An integrated donation system using the **Stripe API** for secure payments.
+* **👤 User Profiles:** A dedicated profile page for users to manage their information.
+* **🔐 Authentication:** Secure login and registration system for users using **JWT (JSON Web Tokens)**.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 👑 Admin Dashboard Features
+* **🐾 Pet Management:** Full CRUD (Create, Read, Update, Delete) functionality for all pet listings.
+* **👥 User Management:** View a list of all registered users and the ability to delete user accounts.
+* **📈 Donation History:** View a complete history of all donations made through the platform.
+* **📄 Article Management:** View and delete any articles submitted by users to maintain community standards.
+* **✅ Adoption Request Management:** View all incoming adoption requests, with the ability to approve or reject them.
 
-### `npm test`
+## 💻 Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This project is built using the MERN stack and other modern web technologies.
 
-### `npm run build`
+* **Frontend:**
+    * **React:** A JavaScript library for building the user interface.
+* **Backend:**
+    * **Node.js:** A JavaScript runtime environment.
+    * **Express.js:** A web application framework for Node.js.
+* **Database:**
+    * **MongoDB:** A NoSQL database (hosted on MongoDB Atlas).
+* **Authentication:**
+    * **JWT (JSON Web Tokens):** For secure user authentication and session management.
+* **Payments:**
+    * **Stripe API:** To handle secure online donations.
+* **Email Services:**
+    * **EmailJS:** For sending email confirmations directly from the client-side.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To get the full application running locally, you will need to set up both the backend and frontend services.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 1. Backend Setup (This Repository)
+1.  Clone this repository:
+    ```sh
+    git clone https://github.com/ABHIHG24/petpalsBackend.git
+    ```
+2.  Navigate to the project directory:
+    ```sh
+    cd petpalsBackend
+    ```
+3.  Install dependencies:
+    ```sh
+    npm install
+    ```
+4.  Create a `.env` file and add the following environment variables:
+    ```
+    MONGO_URI=your_mongodb_connection_string
+    STRIPE_SECRET_KEY=your_stripe_secret_key
+    JWT_SECRET=your_jwt_secret_key
+    ```
+5.  Start the backend server:
+    ```sh
+  node index.jx or nodemon index.js
+    ```
+    The server will be running on `http://localhost:PORT` (e.g., port 5000).
 
-### `npm run eject`
+### 2. Frontend Setup
+1.  Clone the frontend repository in a **new terminal window**:
+    ```sh
+    git clone https://github.com/ABHIHG24/petpals.git
+    ```
+2.  Navigate to the project directory:
+    ```sh
+    cd petpals
+    ```
+3.  Install dependencies:
+    ```sh
+    npm install
+    ```
+4.  Start the frontend development server:
+    ```sh
+    npm start
+    ```
+    The React application will be available at `http://localhost:3000`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 📋 Usage
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-# petpal-frontend
-My first Project 
->>>>>>> origin/main
+Once both services are running, you can:
+* Open `http://localhost:3000` in your browser.
+* Register a new user account to access the user-facing features.
+* Log in with demo credentials to access the admin dashboard.
+    admin username - admin 
+    password - 12345678
